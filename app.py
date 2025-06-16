@@ -27,7 +27,7 @@ for file in json_files:
         st.markdown("---")
         cols = st.columns([2, 3, 5])
         with cols[0]:
-            st.image(outfit["image"], use_column_width=True)
+            st.image(f"./{outfit['image']}", use_container_width=True)
         with cols[1]:
             st.subheader(outfit["title"])
         with cols[2]:
