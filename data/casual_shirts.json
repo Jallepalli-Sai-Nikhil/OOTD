@@ -1,12 +1,13 @@
 {
-  "category": "Casual Shirts",
-  "folder": "casual_shirts",
+  "category": "casual shirts",
   "outfits": [
     {
-      "title": "Light Blue Cotton Shirt",
-      "image": "look1.jpg",
+      "title": "olive green casual loose",
+      "image": "static/casual_shirts/olive_green_casual_loose.png",
       "brands": [
-        { "label": "mufti", "link": "https://www.muftijeans.in/" }
+        { "label": "mufti", "link": "https://www.muftijeans.in/" },
+        { "label": "snitch", "link": "https://www.snitch.co.in/" },
+        { "label": "h&m", "link": "https://www2.hm.com/en_in/index.html" }
       ]
     }
   ]
