@@ -1,13 +1,12 @@
 {
-  "category": "casual shirts",
+  "category": "Casual Shirts",
+  "folder": "casual_shirts",
   "outfits": [
     {
-      "title": "olive green casual loose",
-      "image": "static/casual_shirts/olive_green_casual_loose.png",
+      "title": "Olive Green Casual Loose Shirt",
+      "image": "olive_green_casual_loose.png", 
       "brands": [
-        { "label": "mufti", "link": "https://www.muftijeans.in/" },
-        { "label": "snitch", "link": "https://www.snitch.co.in/" },
-        { "label": "h&m", "link": "https://www2.hm.com/en_in/index.html" }
+        { "label": "mufti", "link": "https://www.muftijeans.in/" }
       ]
     }
   ]
