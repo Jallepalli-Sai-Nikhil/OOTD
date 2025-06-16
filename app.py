@@ -2,23 +2,29 @@ import streamlit as st
 import json
 from pathlib import Path
 
-# 🔐 Password protection via Streamlit Secrets
-PASSWORD = st.secrets["app_password"]
-user_input = st.text_input("Enter password to unlock outfits", type="password")
+# 🔧 Must be first
+st.set_page_config(page_title="Outfit Vault", layout="wide")
 
+# 🔐 Password protection via Streamlit Secrets
+try:
+    PASSWORD = st.secrets["password"]
+except Exception as e:
+    st.error("❌ Secrets file missing! Create .streamlit/secrets.toml locally or set on Streamlit Cloud.")
+    st.stop()
+
+user_input = st.text_input("Enter password to unlock outfits", type="password")
 if user_input != PASSWORD:
     st.warning("🔐 Incorrect password or not entered.")
     st.stop()
 
-# ✅ Streamlit app config
-st.set_page_config(page_title="Outfit Vault", layout="wide")
-st.title("🧵 Outfit Vault – Curated Looks by Category")
+# 🎨 Title
+st.title("🧵 Outfit Vault – Curated Looks")
 
 # 📁 Paths
 DATA_DIR = Path("data")
 STATIC_DIR = "static"
 
-# 🔁 Load all outfit category JSONs
+# 📦 Load all outfit category JSONs
 categories = {}
 for json_file in sorted(DATA_DIR.glob("*.json")):
     with open(json_file, "r", encoding="utf-8") as f:
@@ -32,7 +38,7 @@ section = categories[selected_category]
 folder = section.get("folder", "")
 outfits = section.get("outfits", [])
 
-# 🎨 Display each outfit block
+# 🧥 Display outfits
 for outfit in outfits:
     st.markdown("---")
     cols = st.columns([2, 3, 5])
@@ -41,10 +47,14 @@ for outfit in outfits:
     image_path = f"{STATIC_DIR}/{folder}/{image_file}"
 
     with cols[0]:
+        # Check if image format is valid
         if any(image_file.lower().endswith(ext) for ext in [".jpg", ".jpeg", ".png"]):
-            st.image(image_path, use_container_width=True)
+            try:
+                st.image(image_path, use_container_width=True)
+            except:
+                st.error(f"❌ Error loading image: {image_path}")
         else:
-            st.warning("⚠️ Unsupported or missing image file.")
+            st.warning("⚠️ Unsupported image format")
 
     with cols[1]:
         st.subheader(outfit.get("title", "Untitled Look"))
