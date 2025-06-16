@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 # 🔐 Password protection via Streamlit Secrets
-PASSWORD = st.secrets["password"]
+PASSWORD = st.secrets["app_password"]
 user_input = st.text_input("Enter password to unlock outfits", type="password")
 
 if user_input != PASSWORD:
