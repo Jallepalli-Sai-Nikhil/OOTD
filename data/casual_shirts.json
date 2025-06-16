@@ -1,0 +1,14 @@
+{
+  "category": "casual shirts",
+  "outfits": [
+    {
+      "title": "light blue cotton shirt",
+      "image": "assets/casual_shirts/look1.jpg",
+      "brands": [
+        { "label": "mufti", "link": "https://www.muftijeans.in/" },
+        { "label": "snitch", "link": "https://www.snitch.co.in/" },
+        { "label": "h&m", "link": "https://www2.hm.com/en_in/index.html" }
+      ]
+    }
+  ]
+}
