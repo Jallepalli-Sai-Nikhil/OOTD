@@ -6,9 +6,8 @@ st.set_page_config(page_title="Outfit Guide", layout="wide")
 st.title("🧵 Outfit Ideas by Category")
 
 DATA_DIR = Path("data")
-ASSETS_DIR = Path("assets")
+STATIC_DIR = "static"  # Folder visible to streamlit
 
-# List all JSON files (1 per category)
 json_files = sorted(DATA_DIR.glob("*.json"))
 
 for json_file in json_files:
@@ -17,18 +16,17 @@ for json_file in json_files:
 
     category = data.get("category", "Unknown Category")
     folder = data.get("folder", "")
+
     st.header(f"📌 {category}")
 
     for outfit in data["outfits"]:
         st.markdown("---")
         cols = st.columns([2, 3, 5])
-        
+
+        image_url = f"{STATIC_DIR}/{folder}/{outfit['image']}"
+
         with cols[0]:
-            image_path = ASSETS_DIR / folder / outfit["image"]
-            if image_path.exists():
-                st.image(str(image_path), use_container_width=True)
-            else:
-                st.error(f"Image not found: {image_path}")
+            st.image(image_url, use_container_width=True)  # ✅ Load as URL, not PIL
 
         with cols[1]:
             st.subheader(outfit["title"])
