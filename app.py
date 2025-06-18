@@ -107,8 +107,21 @@ muscle_group = next((mg for mg in muscle_data if mg.get("muscle_group") == selec
 
 # ...existing code above...
 
+# ...existing code above...
+
 if muscle_group:
     st.subheader(f"🔹 {muscle_group.get('muscle_group', '')}")
+
+    # Show main muscle group image if available
+    main_image = muscle_group.get("image")
+    if main_image:
+        folder = muscle_group.get('folder', '').replace('muscles/', '')
+        main_image_path = f"{STATIC_DIR}/{folder}/{main_image}"
+        try:
+            st.image(main_image_path, caption=muscle_group.get('muscle_group', ''), use_container_width=True)
+        except:
+            st.error(f"❌ Error loading image: {main_image_path}")
+
     sub_muscles = muscle_group.get("sub_muscles", [])
     if not sub_muscles:
         st.info("No sub sections available for this muscle group.")
@@ -135,6 +148,7 @@ if muscle_group:
                     title = ex.get("title", "Untitled Exercise")
                     with cols[0]:
                         if gif_file:
+                            folder = muscle_group.get('folder', '').replace('muscles/', '')
                             gif_path = f"{STATIC_DIR}/{folder}/{gif_file}"
                             try:
                                 st.image(gif_path, use_container_width=True)
