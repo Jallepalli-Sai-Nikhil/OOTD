@@ -105,6 +105,8 @@ muscle_group = next((mg for mg in muscle_data if mg.get("muscle_group") == selec
 
 # ...existing code...
 
+# ...existing code above...
+
 if muscle_group:
     st.subheader(f"🔹 {muscle_group.get('muscle_group', '')}")
     sub_muscles = muscle_group.get("sub_muscles", [])
@@ -112,24 +114,33 @@ if muscle_group:
         st.info("No sub sections available for this muscle group.")
     else:
         for sub in sub_muscles:
-            st.markdown(f"**{sub.get('name', 'Sub Muscle')}**")
+            st.markdown(f"### {sub.get('name', 'Sub Muscle')}")
+            # Show sub muscle image if available
+            sub_image = sub.get("image")
+            if sub_image:
+                folder = muscle_group.get('folder', '').replace('muscles/', '')
+                sub_image_path = f"{STATIC_DIR}/{folder}/{sub_image}"
+                try:
+                    st.image(sub_image_path, caption=sub.get('name', ''), use_container_width=True)
+                except:
+                    st.error(f"❌ Error loading image: {sub_image_path}")
+            # List exercises for this sub muscle
             exercises = sub.get("exercises", [])
             if not exercises:
                 st.write("_No exercises listed._")
-            for ex in exercises:
-                cols = st.columns([2, 8])
-                gif_file = ex.get("gif")
-                title = ex.get("title", "Untitled Exercise")
-                with cols[0]:
-                    if gif_file:
-                        # Remove 'muscles/' from folder if present
-                        folder = muscle_group.get('folder', '').replace('muscles/', '')
-                        gif_path = f"{STATIC_DIR}/{folder}/{gif_file}"
-                        try:
-                            st.image(gif_path, use_container_width=True)
-                        except:
-                            st.error(f"❌ Error loading gif: {gif_path}")
-                    else:
-                        st.info("No GIF available")
-                with cols[1]:
-                    st.markdown(f"**{title}**")
+            else:
+                for ex in exercises:
+                    cols = st.columns([2, 8])
+                    gif_file = ex.get("gif")
+                    title = ex.get("title", "Untitled Exercise")
+                    with cols[0]:
+                        if gif_file:
+                            gif_path = f"{STATIC_DIR}/{folder}/{gif_file}"
+                            try:
+                                st.image(gif_path, use_container_width=True)
+                            except:
+                                st.error(f"❌ Error loading gif: {gif_path}")
+                        else:
+                            st.info("No GIF available")
+                    with cols[1]:
+                        st.markdown(f"**{title}**")
