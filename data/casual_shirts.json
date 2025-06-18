@@ -8,6 +8,13 @@
       "brands": [
         { "label": "mufti", "link": "https://www.muftijeans.in/" }
       ]
+    },
+    {
+      "title": "White Casual Loose Shirt",
+      "image": "white_casual_shirt.png", 
+      "brands": [
+        { "label": "mufti", "link": "https://www.muftijeans.in/" }
+      ]
     }
   ]
 }
