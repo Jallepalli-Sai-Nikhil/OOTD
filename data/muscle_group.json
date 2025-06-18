@@ -1,9 +1,11 @@
 {
   "muscle_group": "Chest",
-  "folder": "muscles/chest",
+  "folder": "chest",
+  "image": "chest.png",
   "sub_muscles": [
     {
       "name": "Upper Chest",
+      "image": "upper_chest.png",
       "exercises": [
         {
           "title": "Incline Barbell Press",
@@ -17,6 +19,7 @@
     },
     {
       "name": "Mid Chest",
+      "image": "mid_chest.png",
       "exercises": [
         {
           "title": "Flat Barbell Bench Press",
@@ -30,6 +33,7 @@
     },
     {
       "name": "Lower Chest",
+      "image": "lower_chest.png",
       "exercises": [
         {
           "title": "Decline Barbell Press",
@@ -43,6 +47,7 @@
     },
     {
       "name": "Sternum",
+      "image": "sternum.png",
       "exercises": [
         {
           "title": "Cable Crossover (Low to High)",
@@ -52,6 +57,7 @@
     },
     {
       "name": "Serratus Anterior",
+      "image": "serratus_anterior.png",
       "exercises": [
         {
           "title": "Push-Up Plus",
@@ -61,6 +67,7 @@
     },
     {
       "name": "Connector Lower",
+      "image": "connector_lower.png",
       "exercises": [
         {
           "title": "Dips",
@@ -70,6 +77,7 @@
     },
     {
       "name": "Base Chest",
+      "image": "base_chest.png",
       "exercises": [
         {
           "title": "Chest Dips",
@@ -79,6 +87,7 @@
     },
     {
       "name": "Side Chest",
+      "image": "side_chest.png",
       "exercises": [
         {
           "title": "Single Arm Cable Fly",
