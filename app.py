@@ -4,7 +4,13 @@ from pathlib import Path
 
 # 🔧 Must be first
 st.set_page_config(page_title="Outfit Vault", layout="wide")
-
+# Patch muscle group folder paths to match new static directory structure
+def fix_muscle_folder(folder):
+    # Ensure 'muscles/' prefix is present and no leading/trailing slashes
+    folder = folder.strip("/")
+    if not folder.startswith("muscles/"):
+        folder = f"muscles/{folder}"
+    return folder
 # 🔐 Password protection via Streamlit Secrets
 try:
     PASSWORD = st.secrets["password"]
@@ -115,7 +121,7 @@ if muscle_group:
     # Show main muscle group image if available
     main_image = muscle_group.get("image")
     if main_image:
-        folder = muscle_group.get('folder', '').replace('muscles/', '')
+        folder = fix_muscle_folder(muscle_group.get('folder', ''))
         main_image_path = f"{STATIC_DIR}/{folder}/{main_image}"
         try:
             st.image(main_image_path, caption=muscle_group.get('muscle_group', ''), use_container_width=True)
@@ -131,7 +137,7 @@ if muscle_group:
             # Show sub muscle image if available
             sub_image = sub.get("image")
             if sub_image:
-                folder = muscle_group.get('folder', '').replace('muscles/', '')
+                folder = fix_muscle_folder(muscle_group.get('folder', ''))
                 sub_image_path = f"{STATIC_DIR}/{folder}/{sub_image}"
                 try:
                     st.image(sub_image_path, caption=sub.get('name', ''), use_container_width=True)
@@ -148,7 +154,7 @@ if muscle_group:
                     title = ex.get("title", "Untitled Exercise")
                     with cols[0]:
                         if gif_file:
-                            folder = muscle_group.get('folder', '').replace('muscles/', '')
+                            folder = fix_muscle_folder(muscle_group.get('folder', ''))
                             gif_path = f"{STATIC_DIR}/{folder}/{gif_file}"
                             try:
                                 st.image(gif_path, use_container_width=True)
