@@ -4,6 +4,9 @@ from pathlib import Path
 
 # 🔧 Must be first
 st.set_page_config(page_title="Outfit Vault", layout="wide")
+
+# Set a fixed image display width for all images and gifs
+IMAGE_DISPLAY_WIDTH = 300
 # Patch muscle group folder paths to match new static directory structure
 def fix_muscle_folder(folder):
     # Ensure 'muscles/' prefix is present and no leading/trailing slashes
