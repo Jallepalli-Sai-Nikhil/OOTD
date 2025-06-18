@@ -109,7 +109,11 @@ if not show_muscle_section:
     st.stop()
 
 muscle_group_names = [mg.get("muscle_group", "Unknown") for mg in muscle_data]
-selected_muscle = st.selectbox("🏋️ Choose a muscle group", muscle_group_names)
+# Only show muscle group selectbox if "Muscle Group" category is selected
+if selected_category.lower() == "muscle group":
+    selected_muscle = st.selectbox("🏋️ Choose a muscle group", muscle_group_names)
+else:
+    selected_muscle = None
 
 # Find selected muscle group
 muscle_group = next((mg for mg in muscle_data if mg.get("muscle_group") == selected_muscle), None)
