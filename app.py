@@ -103,7 +103,9 @@ else:
 if isinstance(muscle_data, dict):
     muscle_data = [muscle_data]
 
-# Only show muscle group section if a muscle group is selected
+# Only show muscle group section if "Muscle Group" category is selected
+if selected_category.lower() != "muscle group":
+    st.stop()
 show_muscle_section = st.checkbox("Show Body Vault section", value=False)
 if not show_muscle_section:
     st.stop()
