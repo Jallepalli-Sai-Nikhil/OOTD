@@ -103,6 +103,11 @@ else:
 if isinstance(muscle_data, dict):
     muscle_data = [muscle_data]
 
+# Only show muscle group section if a muscle group is selected
+show_muscle_section = st.checkbox("Show Body Vault section", value=False)
+if not show_muscle_section:
+    st.stop()
+
 muscle_group_names = [mg.get("muscle_group", "Unknown") for mg in muscle_data]
 selected_muscle = st.selectbox("🏋️ Choose a muscle group", muscle_group_names)
 
