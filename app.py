@@ -113,26 +113,22 @@ show_muscle_section = st.checkbox("Show Body Vault section", value=False)
 if not show_muscle_section:
     st.stop()
 
-muscle_group_names = [mg.get("muscle_group", "Unknown") for mg in muscle_data]
-# Only show muscle group selectbox if "Muscle Group" category is selected
-if selected_category.lower() == "muscle group":
-    selected_muscle = st.selectbox("🏋️ Choose a muscle group", muscle_group_names)
-else:
-    selected_muscle = None
-
-# Find selected muscle group
-muscle_group = next((mg for mg in muscle_data if mg.get("muscle_group") == selected_muscle), None)
-
 # ...existing code...
 
-# ...existing code above...
+IMAGE_DISPLAY_WIDTH = 150
+IMAGE_DISPLAY_HEIGHT = 100
+
+def fix_muscle_folder(folder):
+    # Remove 'muscles/' if present, for static path consistency
+    return folder.replace('muscles/', '')
+
 # Utility: Centered image in fixed-size container
-def centered_image(image_path, caption=None, width=IMAGE_DISPLAY_WIDTH):
+def centered_image(image_path, caption=None, width=IMAGE_DISPLAY_WIDTH, height=IMAGE_DISPLAY_HEIGHT):
     container_style = f"""
         display: flex;
         justify-content: center;
         align-items: center;
-        height: {width}px;
+        height: {height}px;
         width: {width}px;
         background: #fafafa;
         border: 1px solid #eee;
@@ -148,18 +144,27 @@ def centered_image(image_path, caption=None, width=IMAGE_DISPLAY_WIDTH):
     st.markdown(img_html, unsafe_allow_html=True)
     if caption:
         st.caption(caption)
-# ...existing code above...
+
+muscle_group_names = [mg.get("muscle_group", "Unknown") for mg in muscle_data]
+# Only show muscle group selectbox if "Muscle Group" category is selected
+if selected_category.lower() == "muscle group":
+    selected_muscle = st.selectbox("🏋️ Choose a muscle group", muscle_group_names)
+else:
+    selected_muscle = None
+
+# Find selected muscle group
+muscle_group = next((mg for mg in muscle_data if mg.get("muscle_group") == selected_muscle), None)
 
 if muscle_group:
     st.subheader(f"🔹 {muscle_group.get('muscle_group', '')}")
 
-    # Show main muscle group image if available
+    # Show main muscle group image if available, centered and fixed size
     main_image = muscle_group.get("image")
     if main_image:
         folder = fix_muscle_folder(muscle_group.get('folder', ''))
         main_image_path = f"{STATIC_DIR}/{folder}/{main_image}"
         try:
-            st.image(main_image_path, caption=muscle_group.get('muscle_group', ''), use_container_width=True)
+            centered_image(main_image_path, caption=muscle_group.get('muscle_group', ''))
         except:
             st.error(f"❌ Error loading image: {main_image_path}")
 
@@ -169,13 +174,13 @@ if muscle_group:
     else:
         for sub in sub_muscles:
             st.markdown(f"### {sub.get('name', 'Sub Muscle')}")
-            # Show sub muscle image if available
+            # Show sub muscle image if available, centered and fixed size
             sub_image = sub.get("image")
             if sub_image:
                 folder = fix_muscle_folder(muscle_group.get('folder', ''))
                 sub_image_path = f"{STATIC_DIR}/{folder}/{sub_image}"
                 try:
-                    st.image(sub_image_path, caption=sub.get('name', ''), use_container_width=True)
+                    centered_image(sub_image_path, caption=sub.get('name', ''))
                 except:
                     st.error(f"❌ Error loading image: {sub_image_path}")
             # List exercises for this sub muscle
@@ -192,10 +197,11 @@ if muscle_group:
                             folder = fix_muscle_folder(muscle_group.get('folder', ''))
                             gif_path = f"{STATIC_DIR}/{folder}/{gif_file}"
                             try:
-                                st.image(gif_path, use_container_width=True)
+                                centered_image(gif_path, width=IMAGE_DISPLAY_WIDTH, height=IMAGE_DISPLAY_HEIGHT)
                             except:
                                 st.error(f"❌ Error loading gif: {gif_path}")
                         else:
                             st.info("No GIF available")
                     with cols[1]:
                         st.markdown(f"**{title}**")
+# ...existing code...s
