@@ -80,3 +80,47 @@ for outfit in outfits:
                     """,
                     unsafe_allow_html=True
                 )
+
+# --- BODY SECTION ADDITION ---
+st.markdown("---")
+st.header("💪 Body Vault – Muscle Groups & Exercises")
+
+# 📦 Load muscle group data
+MUSCLE_GROUPS_PATH = DATA_DIR / "muscle_group.json"
+if MUSCLE_GROUPS_PATH.exists():
+    with open(MUSCLE_GROUPS_PATH, "r", encoding="utf-8") as f:
+        muscle_data = json.load(f)
+else:
+    muscle_data = []
+
+# If muscle_data is a dict, wrap in list for uniformity
+if isinstance(muscle_data, dict):
+    muscle_data = [muscle_data]
+
+muscle_group_names = [mg.get("muscle_group", "Unknown") for mg in muscle_data]
+selected_muscle = st.selectbox("🏋️ Choose a muscle group", muscle_group_names)
+
+# Find selected muscle group
+muscle_group = next((mg for mg in muscle_data if mg.get("muscle_group") == selected_muscle), None)
+
+if muscle_group:
+    st.subheader(f"🔹 {muscle_group.get('muscle_group', '')}")
+    sub_muscles = muscle_group.get("sub_muscles", [])
+    for sub in sub_muscles:
+        st.markdown(f"**{sub.get('name', 'Sub Muscle')}**")
+        exercises = sub.get("exercises", [])
+        for ex in exercises:
+            cols = st.columns([2, 8])
+            gif_file = ex.get("gif")
+            title = ex.get("title", "Untitled Exercise")
+            with cols[0]:
+                if gif_file:
+                    gif_path = f"{STATIC_DIR}/{muscle_group.get('folder','')}/{gif_file}"
+                    try:
+                        st.image(gif_path, use_container_width=True)
+                    except:
+                        st.error(f"❌ Error loading gif: {gif_path}")
+                else:
+                    st.info("No GIF available")
+            with cols[1]:
+                st.markdown(f"**{title}**")

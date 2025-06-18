@@ -1,0 +1,90 @@
+{
+  "muscle_group": "Chest",
+  "folder": "muscles/chest",
+  "sub_muscles": [
+    {
+      "name": "Upper Chest",
+      "exercises": [
+        {
+          "title": "Incline Barbell Press",
+          "gif": "incline_barbell_press.gif"
+        },
+        {
+          "title": "Incline Dumbbell Fly",
+          "gif": "incline_dumbbell_fly.gif"
+        }
+      ]
+    },
+    {
+      "name": "Mid Chest",
+      "exercises": [
+        {
+          "title": "Flat Barbell Bench Press",
+          "gif": "flat_barbell_bench_press.gif"
+        },
+        {
+          "title": "Flat Dumbbell Press",
+          "gif": "flat_dumbbell_press.gif"
+        }
+      ]
+    },
+    {
+      "name": "Lower Chest",
+      "exercises": [
+        {
+          "title": "Decline Barbell Press",
+          "gif": "decline_barbell_press.gif"
+        },
+        {
+          "title": "Decline Dumbbell Fly",
+          "gif": "decline_dumbbell_fly.gif"
+        }
+      ]
+    },
+    {
+      "name": "Sternum",
+      "exercises": [
+        {
+          "title": "Cable Crossover (Low to High)",
+          "gif": "cable_crossover_low_to_high.gif"
+        }
+      ]
+    },
+    {
+      "name": "Serratus Anterior",
+      "exercises": [
+        {
+          "title": "Push-Up Plus",
+          "gif": "push_up_plus.gif"
+        }
+      ]
+    },
+    {
+      "name": "Connector Lower",
+      "exercises": [
+        {
+          "title": "Dips",
+          "gif": "dips.gif"
+        }
+      ]
+    },
+    {
+      "name": "Base Chest",
+      "exercises": [
+        {
+          "title": "Chest Dips",
+          "gif": "chest_dips.gif"
+        }
+      ]
+    },
+    {
+      "name": "Side Chest",
+      "exercises": [
+        {
+          "title": "Single Arm Cable Fly",
+          "gif": "single_arm_cable_fly.gif"
+        }
+      ]
+    }
+  ]
+}
