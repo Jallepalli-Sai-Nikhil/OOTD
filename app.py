@@ -126,7 +126,28 @@ muscle_group = next((mg for mg in muscle_data if mg.get("muscle_group") == selec
 # ...existing code...
 
 # ...existing code above...
-
+# Utility: Centered image in fixed-size container
+def centered_image(image_path, caption=None, width=IMAGE_DISPLAY_WIDTH):
+    container_style = f"""
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: {width}px;
+        width: {width}px;
+        background: #fafafa;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        margin: 0 auto 10px auto;
+        overflow: hidden;
+    """
+    img_html = f"""
+        <div style="{container_style}">
+            <img src="{image_path}" alt="{caption or ''}" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
+        </div>
+    """
+    st.markdown(img_html, unsafe_allow_html=True)
+    if caption:
+        st.caption(caption)
 # ...existing code above...
 
 if muscle_group:
